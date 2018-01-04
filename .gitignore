@@ -99,3 +99,33 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# pictures
+media/avatar/*.jpg
+media/avatar/*.png
+media/avatar/*.bmp
+media/avatar/*.gif
+media/avatar/*.jpeg
