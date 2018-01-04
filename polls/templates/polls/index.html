@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Find the Repairman{% endblock title %}
+
+{% block script %}
+<script type="text/javascript">
+    function check(form) {
+        if (form.searchjob.value=='None'){
+            alert("Please choose a job!");
+            form.searchjob.focus();
+            return false;
+        }
+        if (form.searchpostcode.value=='None'){
+            alert("Please choose a postcode!");
+            form.searchpostcode.focus();
+            return false;
+        }        
+        return true;
+    }
+</script>
+{% endblock script %}
+
+{% block content %}
+<form name="searchform" action="/search/" method="get" onsubmit="return check(this)"> 
+    Search Job:
+    <select name="searchjob"> 
+        <option value="None", selected = "selected">Please select</option> 
+        <option value="hairdresser">hairdresser</option> 
+        <option value="Electrician">Electrician</option> 
+    </select>
+    Search Postcode:
+    <select name="searchpostcode"> 
+        <option value="None", selected = "selected">Please select</option> 
+        <option value="200086">200086</option> 
+        <option value="200233">200233</option> 
+    </select>
+    <br> 
+    <input type="submit", value = "submit">
+</form>
+{% endblock content %}

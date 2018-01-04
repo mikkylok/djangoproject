@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+{% if profile %}
+    <p>id is {{ profile.id }}, username is {{ profile.username }}, email is {{ profile.email }}</p>
+{% else %}
+    <p>This profile is unavailable.</p>
+{% endif %}
+{% endblock %}

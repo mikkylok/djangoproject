@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<h1>Login</h1>
+{% if not loggedin %}
+    <p>Invalid username or password!</p>
+{% endif %}
+<form method='post' enctype='multipart/form-data'>
+    {% csrf_token %}
+    <input type="text" name="username" id="username" placeholder="enter your username">
+    <input type="password" name="password" id="password" placeholder="enter your password"> 
+    <input type='submit' value='Login'>
+   <br>
+</form>
+New user?<a href='http://23.239.0.10:8000/register/'>Register</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Be a repairman{% endblock title %}
+
+{% block content %}
+<h1>Repairman detail:</h1>
+<form method='post' enctype='multipart/form-data'>
+{% csrf_token %}
+{{ berepairmanform.as_p }}
+<input type='submit' value='submit'>
+</form>
+{% endblock %}

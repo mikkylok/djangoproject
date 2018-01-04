@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Find the Repairman</title>
+<script type="text/javascript">
+    function check(form) {
+        if (form.searchjob.value=='None'){
+            alert("Please choose a job!");
+            form.searchjob.focus();
+            return false;
+        }
+        if (form.searchpostcode.value=='None'){
+            alert("Please choose a postcode!");
+            form.searchpostcode.focus();
+            return false;
+        }        
+        return true;
+    }
+</script>
+</head>
+<body>
+<!--
+{% if results %}
+    <ul>
+    {% for item in results %}
+        <li>id is {{ item.id }}, name is {{ item.name }}, job is {{ item.job }}, postcode is {{ item.postcode }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No body is available.</p>
+{% endif %}
+-->
+<form name="searchform" action="/search/" method="get" onsubmit="return check(this)"> 
+    Search Job:
+    <select name="searchjob"> 
+        <option value="None", selected = "selected">Please select</option> 
+        <option value="hairdresser">hairdresser</option> 
+        <option value="Electrician">Electrician</option> 
+    </select>
+    Search Postcode:
+    <select name="searchpostcode"> 
+        <option value="None", selected = "selected">Please select</option> 
+        <option value="200086">200086</option> 
+        <option value="200233">200233</option> 
+    </select>
+    <br> 
+    <input type="submit", value = "submit">
+</form>
+
+<br>
+
+{% if request.user.is_authenticated %}
+<form id="logout" method='get' action='/logout/'>
+    <button type='submit'>Logout</button>
+</form>
+<form id="profile" method='get' action='/profile/{{request.user.id}}'>
+    <button type='submit'>Profile</button>
+</form>
+<form id="berepairman" method='get' action='/berepairman/'>
+    <button type='submit'>Be Repairman</button>
+</form>
+{% else %}
+<form id="login" method='get' action='/login/'>
+    <button type='submit'>Login</button>
+</form>
+<form id="register" method='get' action='/register/'>
+    <button type='submit'>Register</button>
+</form>
+{% endif %}
+
+</body>
+</html>

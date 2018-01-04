@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Find the Repairman{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for item in results %}
+        <li>username is {{ item.username }}, job is {{ item.job }}, postcode is {{ item.postcode }}, email is {{item.email }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
