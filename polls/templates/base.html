@@ -5,6 +5,7 @@
         <title>{% block title %}Django{% endblock title%}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/footer.css">
         <script src="/static/bootstrap/js/jquery-3.2.1.min.js"></script>
         <script src="/static/bootstrap/js/bootstrap.min.js"></script>
         {% block script %}{% endblock %}
@@ -49,12 +50,12 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+{% block page_content %}{% endblock %}
+</div>
 {% endblock %}
 
-{% block footer %}
-<hr>
-<p>Thanks for visiting.</p>
-{% endblock %}
+{% include 'footer.html' %}
 
 </body>
 </html>

@@ -2,11 +2,42 @@
 
 {% block title %}Register{% endblock %}
 
-{% block content %}
-<h1>Register an account</h1>
-<form method='post' enctype='multipart/form-data'>
-{% csrf_token %}
-{{ registerform.as_p }}
-<input type='submit' value='Register'>
-</form>
+{% block page_content %}
+<div class="row text-center vertical-middle-sm">
+    <h1>Register</h1>
+    <form class="form-horizontal" method='post' enctype='multipart/form-data' action='/register/'>
+    {% csrf_token %}
+        <div class="form-group">
+            <label class="col-md-5 control-label">Username</label>
+            <div class="col-md-3 text-left">
+                <input type="text" class="form-control" name="username" placeholder="Please enter username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-5 control-label">Password</label>
+            <div class="col-md-3 text-left">
+                <input type="password" class="form-control" name="password1" placeholder="Please enter password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-5 control-label">Confirm password</label>
+            <div class="col-md-3 text-left">
+                <input type="password" class="form-control" name="password2" placeholder="Please enter password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-5 control-label">Email</label>
+            <div class="col-md-3 text-left">
+                <input type="text" class="form-control" name="email" placeholder="Please enter email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="avatar" class="col-md-5 control-label">Avatar</label>
+            <input type="file" name="avatar" id="avatar">
+        </div>
+        <input type='submit' class="btn btn-primary btn-lg" value='Register'>
+    </form>
+    </br>
+    Already registered?<a href='/login/'>Login</a>
+</div>
 {% endblock %}

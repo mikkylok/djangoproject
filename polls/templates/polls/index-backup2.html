@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Find the Repairman{% endblock title %}
+
+{% block script %}
+<script type="text/javascript">
+    function check(form) {
+        if (form.searchjob.value=='None'){
+            alert("Please choose a job!");
+            form.searchjob.focus();
+            return false;
+        }
+        if (form.searchpostcode.value=='None'){
+            alert("Please choose a postcode!");
+            form.searchpostcode.focus();
+            return false;
+        }        
+        return true;
+    }
+    
+    function clickdropdown(){
+    alert(document.getElementById("jobresult").value);
+    }
+</script>
+{% endblock script %}
+
+{% block page_content %}
+<form name="searchform" action="/search/" method="get" onsubmit="return check(this)" class="searchform-wrap"> 
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-3">
+    <div class="dropdown" name="searchjob">
+        Search Job:
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1">
+            <span id="searchjob" style="margin-right:10px;">Job</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="jobresult">
+            <li role="presentation" value="hairdresser"><a role="menuitem" tableindex="-1" href="#" onclick="clickdropdown()">hairdresser</a></li>
+            <li role="presentation" value="electrician"><a role="menuitem" tableindex="-1" href="#">electrician</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="dropdown" name="searchpostcode">
+        Search Postcode:
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span id="searchpostcode" style="margin-right:10px">Postcode</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li value="200086"><a href="#">200086</a></li>
+            <li value="200233"><a href="#">200233</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-3"></div>
+</div>
+<br></br>
+<div class="row">
+<div class="col-md-5"></div>
+<div class="col-md-2">
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" value="submit">Submit</button>
+    </div>
+</div>
+<div class="col-md-5"></div>
+</div>
+</form>
+{% endblock %}

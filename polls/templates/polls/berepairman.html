@@ -2,11 +2,25 @@
 
 {% block title %}Be a repairman{% endblock title %}
 
-{% block content %}
-<h1>Repairman detail:</h1>
-<form method='post' enctype='multipart/form-data'>
-{% csrf_token %}
-{{ berepairmanform.as_p }}
-<input type='submit' value='submit'>
-</form>
+{% block page_content %}
+<div class="row text-center vertical-middle-sm">
+    <h1>Repairman Detail:</h1>
+    <form class="form-horizontal" method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label class="col-md-5 control-label">Job</label>
+            <div class="col-md-3 text-left">
+                <input type="text" class="form-control" name="job" placeholder="Please enter job">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-5 control-label">Postcode</label>
+            <div class="col-md-3 text-left">
+                <input type="text" class="form-control" name="postcode" placeholder="Please enter postcode">
+            </div>
+        </div>
+        <input type='submit' class="btn btn-primary btn-lg" value='Submit'>
+    </form>
+    </br>
+</div>
 {% endblock %}

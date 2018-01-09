@@ -13,6 +13,8 @@ from models import UserProfile
 
 from django.contrib import messages
 from django.conf import settings
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 '''
 import os,django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE":"djangoproject.settings")
@@ -91,12 +93,31 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 def search(request):
-    if 'searchjob' in request.GET and 'searchpostcode' in request.GET:
-        searchjob = request.GET['searchjob']
-        searchpostcode = request.GET['searchpostcode']
+    if 'job' in request.GET and 'postcode' in request.GET:
+        searchjob = request.GET['job']
+        searchpostcode = request.GET['postcode']
         #message = 'You are searching for ' + searchjob
         cursor.execute("SELECT repairman.job,repairman.postcode,auth_user.username,auth_user.email FROM repairman,auth_user WHERE repairman.user_id=auth_user.id and job LIKE '%%%s%%' and postcode LIKE '%%%s%%'"%(searchjob,searchpostcode))
         results = cursor.fetchall()
+        if results != ():
+            paginator = Paginator(results,2)
+            page = request.GET.get('page')
+            try:
+                current_page = paginator.page(page)
+                repairmen = current_page.object_list
+            except PageNotAnInteger:
+                current_page = paginator.page(1)
+                repairmen = current_page.object_list
+            except EmptyPage:
+                current_page = paginator.page(paginator.num_pages)
+                repairmen = current_page.object_list
+            return render(request,"polls/search_results.html",{"repairmen":repairmen,"page":current_page, "job":searchjob,"postcode":searchpostcode})
+        else:
+            return HttpResponse("No Matched results.")
+    else:
+        message = "Empty input!"
+        return HttpResponse(message)
+'''
         if results != ():
             context = {'results':results}
             return render(request, 'polls/search_results.html', context)        
@@ -106,16 +127,21 @@ def search(request):
         message = 'Empty input!'
         return HttpResponse(message)
 '''
+'''
 def search(request):
     return HttpResponse("hello")
 '''
 def profile(request, user_id):
     userid = int(user_id.encode("utf-8"))
+    user = User.objects.get(id=user_id)
+    context = {'user':user}
+    return render(request,'polls/profile.html',context)
+'''
     cursor.execute("SELECT * FROM auth_user WHERE id='%d'"%userid)
     profile = cursor.fetchone()
     context = {'profile':profile}
     return render(request, 'polls/profile.html', context)
-
+'''
 def berepairman(request): 
     if request.method == 'POST':
         berepairmanform = BeRepairmanForm(request.POST)
