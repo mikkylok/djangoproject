@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Find the Repairman{% endblock title %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+    $('#search').click(function(){
+        var job = $('#job').val();
+        var postcode = $('#postcode').val();
+        $.get("/search/",{'job':job,'postcode':postcode},function(data){
+            if(data=='0'){
+                alert("No matched results!")};
+            else{
+                $('#searchresults').text(data)}
+        });
+    });
+});
+</script>
+{% endblock script %}
+
+{% block page_content %}
+    <div class="form-group">
+        <label for="name">Search Job:</label>
+        <select class="form-control" name="job" id="job">
+            <option value="None" selected="selected">Please select</option>
+            <option value="hairdresser">hairdresser</option>
+            <option value="electrician">electrician</option>
+        </select>
+        <label for="name">Search postcode:</label>
+        <select class="form-control" name="postcode" id="postcode">
+            <option value="None" selected="selected">Please select</option>
+            <option value="200086">200086</option>
+            <option value="200233">200233</option>
+        </select>
+   </div>
+   <div class="btn-group">
+       <input type="submit" class="btn btn-primary" value="submit" id="search">
+   </div>
+<div id="searchresults"></div>
+{% endblock %}

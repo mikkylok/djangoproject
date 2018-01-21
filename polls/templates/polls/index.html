@@ -2,27 +2,59 @@
 
 {% block title %}Find the Repairman{% endblock title %}
 
+{% block style %}
+<style>
+.background-pic{ background:url(/media/index-background.jpg) no-repeat;} 
+.background-pichover{ background:#FFF; margin-right:30px;margin-left:30px;color:#FFF;
+background-color:rgba(0,0,0,0.2);} 
+</style>
+{% endblock %}
+
 {% block script %}
+<script>
+$(document).ready(function(){
+    $('#search').click(function(){
+        var job_option = $('#job').val();
+        var postcode_option = $('#postcode').val();
+        if (job_option == ""){
+            alert("Please choose a job!");
+            return false;}
+        else if (postcode_option == ""){
+            alert("Please choose a postcode!");
+            return false;}
+        return true;
+    })
+})
+</script>
 {% endblock script %}
 
-{% block page_content %}
+
+{% block content %}
+<div class="background-pic">
+<div class="background-pichover">
+<div class="container">
 <form role="form" name="searchform" action="/search/" method="get" class="searchform-wrap"> 
     <div class="form-group">
         <label for="name">Search Job:</label>
-        <select class="form-control" name="job">
-            <option value="None",selected="selected">Please select</option>
+        <select class="form-control" name="job" id="job">
+            <option value="",selected="selected">Please select</option>
             <option value="hairdresser">hairdresser</option>
             <option value="electrician">electrician</option>
         </select>
+        </br>
         <label for="name">Search postcode:</label>
-        <select class="form-control" name="postcode">
-            <option value="None",selected="selected">Please select</option>
+        <select class="form-control" name="postcode" id="postcode">
+            <option value="",selected="selected">Please select</option>
             <option value="200086">200086</option>
             <option value="200233">200233</option>
         </select>
    </div>
+   </br>
    <div class="btn-group">
-       <input type="submit" class="btn btn-primary" value="submit">
+       <input type="submit" class="btn btn-primary" value="Submit" id="search">
    </div>
 </form>
+</div>
+</div>
+</div>
 {% endblock %}

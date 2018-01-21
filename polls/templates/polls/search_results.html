@@ -2,12 +2,34 @@
 
 {% block title %}Find the Repairman{% endblock title %}
 
-{% block page_content %}
-<ul>
+{% block content %}
+<div class="container">
     {% for item in repairmen %}
-        <li>username is {{ item.username }}, job is {{ item.job }}, postcode is {{ item.postcode }}, email is {{item.email }}</li>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Repairman info</div>
+        <div class="panel-body">
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Username:</td>
+              <td>{{ item.username }}</td>
+            </tr>
+            <tr>
+              <td>Job:</td>
+              <td>{{ item.job }}</td>
+            </tr>
+            <tr>
+              <td>Postcode:</td>
+              <td>{{ item.postcode }}</td>
+            </tr>
+              <td>Email:</td>
+              <td>{{ item.email }}</td>
+            </tr>           
+          </tbody>
+      </table>
+      </div>
+    </div>
     {% endfor %}
-</ul>
 
 <div class="pagination">
     <span class="step-links">
@@ -21,5 +43,6 @@
         <a href="{{ request.get_full_path }}&page={{ page.next_page_number }}">Next</a>
         {% endif %}
     </span>
+</div>
 </div>
 {% endblock %}

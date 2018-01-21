@@ -15,7 +15,6 @@ from django.contrib import messages
 from django.conf import settings
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.decorators.csrf import csrf_exempt
 '''
 import os,django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE":"djangoproject.settings")
@@ -27,7 +26,6 @@ conn = MySQLdb.connect(host='localhost',user='root',passwd='',cursorclass=MySQLd
 conn.select_db('djangoproject')
 cursor = conn.cursor()
 
-@csrf_exempt
 def register(request):
     #current_time = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()); 
     if request.method == 'POST':
@@ -54,10 +52,7 @@ def register(request):
                 profile = UserProfile(phone=phone,user=new_user) 
                #why cant profile = UserProfile.objects.create(phone=phone,user=new_user)
             profile.save()
-            return HttpResponseRedirect('/polls/')
-        else:
-            error_msg = registerform.errors
-            return render(request,'polls/register.html',{'registerform':registerform, 'errors':error_msg})        
+            return HttpResponseRedirect('/polls/')        
     else:
         registerform = RegisterForm()
     return render(request,'polls/register.html', {'registerform':registerform})
@@ -122,7 +117,6 @@ def search(request):
     else:
         message = "Empty input!"
         return HttpResponse(message)
-
 '''
         if results != ():
             context = {'results':results}
@@ -135,17 +129,7 @@ def search(request):
 '''
 '''
 def search(request):
-    if 'job' in request.GET and 'postcode' in request.GET:
-        searchjob = request.GET['job']
-        searchpostcode = request.GET['postcode']
-        #message = 'You are searching for ' + searchjob
-        cursor.execute("SELECT repairman.job,repairman.postcode,auth_user.username,auth_user.email FROM repairman,auth_user WHERE repairman.user_id=auth_user.id and job LIKE '%%%s%%' and postcode LIKE '%%%s%%'"%(searchjob,searchpostcode))
-        results = cursor.fetchall()
-        if results != ():
-            senddict={"test":"success"}
-            return HttpResponse(senddict)
-        else:
-            return HttpResponse(0)
+    return HttpResponse("hello")
 '''
 def profile(request, user_id):
     userid = int(user_id.encode("utf-8"))
@@ -169,9 +153,6 @@ def berepairman(request):
             conn.commit()
             messages.success(request,'You have successfully registered to be a repairman!')
             return HttpResponseRedirect('/polls/')
-        else:
-            error_msg = berepairmanform.errors
-            return render(request,'polls/berepairman.html',{'berepairmanform':berepairmanform, 'errors':error_msg})        
     else:
         berepairmanform = BeRepairmanForm()
     return render(request,'polls/berepairman.html', {'berepairmanform':berepairmanform})

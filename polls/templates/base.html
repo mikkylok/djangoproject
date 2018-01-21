@@ -4,11 +4,12 @@
     <head>
         <title>{% block title %}Django{% endblock title%}</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="/static/footer.css">
         <script src="/static/bootstrap/js/jquery-3.2.1.min.js"></script>
         <script src="/static/bootstrap/js/bootstrap.min.js"></script>
         {% block script %}{% endblock %}
+        {% block style %}{% endblock %}
     </head>
 
 <body>
@@ -50,9 +51,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-{% block page_content %}{% endblock %}
-</div>
+
 {% endblock %}
 
 {% include 'footer.html' %}

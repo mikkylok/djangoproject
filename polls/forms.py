@@ -2,11 +2,11 @@ from django import forms
 from django.contrib.auth.models import User
 #Form
 class RegisterForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=30,)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput())
-    password2 = forms.CharField(label='Confirm your password', widget=forms.PasswordInput())
-    email = forms.EmailField(label='Email') 
-    phone = forms.CharField(label='Phone',max_length=20)
+    username = forms.CharField(label='Username', max_length=30,error_messages={'required':u'Username can not be empty!'})
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(),error_messages={'required':u'Please input password!'})
+    password2 = forms.CharField(label='Confirm your password', widget=forms.PasswordInput(),error_messages={'required':u'Please confirm your password!'})
+    email = forms.EmailField(label='Email',error_messages={'required':u'Email can not be empty!'}) 
+    phone = forms.CharField(label='Phone',max_length=20,error_messages={'required':u'Phone can not be empty!'})
     avatar = forms.ImageField(required=False,label='Profile picture', max_length=1024)
 
     def clean_username(self):
@@ -41,8 +41,8 @@ class RegisterForm(forms.Form):
 '''
  
 class BeRepairmanForm(forms.Form):
-    job = forms.CharField(label='Job', max_length=100,)
-    postcode = forms.CharField(label='Postcode', max_length=100,)
+    job = forms.CharField(label='Job', max_length=100,error_messages={'required':u'Job can not be empty!'})
+    postcode = forms.CharField(label='Postcode', max_length=100,error_messages={'required':u'Postcode can not be empty!'})
 
      
 '''

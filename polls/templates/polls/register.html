@@ -2,42 +2,55 @@
 
 {% block title %}Register{% endblock %}
 
-{% block page_content %}
+{% block content %}
+<div class="container">
 <div class="row text-center vertical-middle-sm">
     <h1>Register</h1>
-    <form class="form-horizontal" method='post' enctype='multipart/form-data' action='/register/'>
+    <form class="form-horizontal" method='post' enctype='multipart/form-data'>
     {% csrf_token %}
         <div class="form-group">
             <label class="col-md-5 control-label">Username</label>
             <div class="col-md-3 text-left">
-                <input type="text" class="form-control" name="username" placeholder="Please enter username">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Please enter username">
+                <span>{{errors.username}}</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-5 control-label">Password</label>
             <div class="col-md-3 text-left">
-                <input type="password" class="form-control" name="password1" placeholder="Please enter password">
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Please enter password">
+                <span>{{errors.password1}}</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-5 control-label">Confirm password</label>
             <div class="col-md-3 text-left">
-                <input type="password" class="form-control" name="password2" placeholder="Please enter password">
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Please enter password">
+                <span>{{errors.password2}}</span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-5 control-label">Email</label>
             <div class="col-md-3 text-left">
-                <input type="text" class="form-control" name="email" placeholder="Please enter email">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Please enter email">
+                <span>{{errors.email}}</span>
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-5 control-label">Phone</label>
+            <div class="col-md-3 text-left">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Please enter phone">
+                <span>{{errors.phone}}</span>
+            </div>
+        </div>
+         <div class="form-group">
             <label for="avatar" class="col-md-5 control-label">Avatar</label>
             <input type="file" name="avatar" id="avatar">
         </div>
         <input type='submit' class="btn btn-primary btn-lg" value='Register'>
     </form>
     </br>
-    Already registered?<a href='/login/'>Login</a>
+   Already registered?<a href='/login/'>Login</a>
+</div>
 </div>
 {% endblock %}
